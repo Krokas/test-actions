@@ -17,6 +17,7 @@ jobs:
     - name: Build the Docker image version ${{ env.RELEASE_VERSION }}
       run: docker build .  --tag krokas/test-image:latest
   push:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Push image version ${{ env.RELEASE_VERSION }} to docker hub
