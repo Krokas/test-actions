@@ -11,10 +11,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
     - name: getlatesttag
       uses: "WyriHaximus/github-action-get-previous-tag@v1"
       id: previoustag
-    - uses: actions/checkout@v2
     - name: Set RELEASE_VERSION
       run: echo "RELEASE_VERSION=${{ steps.previoustag.outputs.tag }}" >> $GITHUB_ENV
     - name: Build the Docker image version ${{ env.RELEASE_VERSION }}
