@@ -14,12 +14,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build .  --tag krokas/test-image:$(date +%s)
+    - name: Build the Docker image version ${GITHUB_REF#refs/*/}
+      run: docker build .  --tag krokas/test-image:${GITHUB_REF#refs/*/}
     - name: Push image to docker hub
       uses: docker/build-push-action@v1
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: krokas/test-image
-        tag_with_ref: true
+        tags: krokas/test-image:${GITHUB_REF#refs/*/}
